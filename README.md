@@ -3,7 +3,7 @@
 I structure my homeworks inside src/main/java as:
  - homeworkone
  - homeworktwo
- and so on
+ - ...
 
 Author: Simion Alex
 
