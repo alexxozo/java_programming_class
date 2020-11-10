@@ -1,7 +1,13 @@
-package hw1;
+package homeworkone;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Scanner;
-import java.io.*;
 
 public class Homework1 {
 
@@ -24,7 +30,7 @@ public class Homework1 {
             writer.write(Integer.toString(number));
             writer.close();
         } catch (IOException ex) {
-
+            System.out.println(ex.getMessage());
         }
     }
 

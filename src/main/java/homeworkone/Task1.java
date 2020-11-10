@@ -1,4 +1,4 @@
-package hw1;
+package homeworkone;
 
 public class Task1 {
 
