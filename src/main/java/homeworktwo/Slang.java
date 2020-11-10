@@ -1,18 +1,21 @@
 package homeworktwo;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class Slang {
 
-    private Map<String, String> slangDict = Map.of(
-            "PLZ", "please",
-            "FYI", "for your information",
-            "GTFO", "please, leave me alone",
-            "ASAP", "as soon as possible",
-            ":\\)", "[smiling]",
-            ":\\(", "[sad]",
-            "¯\\\\_\\(ツ\\)\\_/¯", "[such is life]"
-    );
+public class Slang {
+    Map<String, String> slangDict = new HashMap<String, String>();
+
+    public Slang() {
+        slangDict.put("PLZ", "please");
+        slangDict.put("FYI", "for your information");
+        slangDict.put("GTFO", "please, leave me alone");
+        slangDict.put("ASAP", "as soon as possible");
+        slangDict.put(":\\)", "[smiling]");
+        slangDict.put(":\\(", "[sad]");
+        slangDict.put("¯\\\\_\\(ツ\\)\\_/¯", "[such is life]");
+    }
 
     public String fixAbbreviations(String sentence) {
         for (Map.Entry<String, String> entry : this.slangDict.entrySet()) {
