@@ -1,4 +1,4 @@
-package homeworktwo;
+package space.harbour.java.hw2;
 
 public class PascalTriangle {
 

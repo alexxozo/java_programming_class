@@ -1,4 +1,4 @@
-package homeworktwo;
+package space.harbour.java.hw2;
 
 import java.util.HashMap;
 import java.util.Map;
