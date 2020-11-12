@@ -108,7 +108,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
         } else {
             buckets[index].add(pair);
         }
-        return null;
+        return pair.getValue();
     }
 
     @Override
