@@ -1,6 +1,13 @@
-package space.harbour.java.hw3;
+package space.harbour.java.hw5;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 
 public class MyHashMap<K, V> implements Map<K, V> {
@@ -59,7 +66,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
         int result = 0;
         for (int i = 0; i < buckets.length; i++) {
             result += buckets[i].size();
-            System.out.println(buckets[i]);
         }
         return result;
     }
@@ -111,7 +117,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
     public V put(K key, V value) {
         Pair<K, V> pair = new Pair<>(key, value);
         int index = keyToBucketIndex(key);
-        if (buckets[index].contains(pair)) {
+        if (containsKey(key)) {
             for (Pair<K, V> existingPair : buckets[index]) {
                 if (existingPair.getKey().equals(key)) {
                     existingPair.value = pair.getValue();
