@@ -1,17 +1,27 @@
 package space.harbour.java.hw3;
 
-import java.util.*;
-
+import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class MyHashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MyHashMap<?, ?> myHashMap = (MyHashMap<?, ?>) o;
-        return bucketSize == myHashMap.bucketSize &&
-                Arrays.equals(buckets, myHashMap.buckets);
+        return bucketSize == myHashMap.bucketSize
+                && Arrays.equals(buckets, myHashMap.buckets);
     }
 
     @Override
