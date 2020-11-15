@@ -7,4 +7,4 @@ I structure my homeworks inside src/main/java/space.harbour.java/ as:
 
 Author: Simion Alex
 
-![ALL HW CHECK](https://github.com/alexxozo/java_programming_class/workflows/ALL%20HW%20CHECK/badge.svg?branch=main)
+![ALL HW CHECK](https://github.com/alexxozo/java_programming_class/workflows/ALL%20HW%20CHECK/badge.svg)
