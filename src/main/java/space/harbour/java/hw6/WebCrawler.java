@@ -6,11 +6,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +22,7 @@ class WebCrawler {
     public static final ConcurrentLinkedQueue<URL> toVisit = new ConcurrentLinkedQueue<>();
     public static final CopyOnWriteArraySet<URL> visited = new CopyOnWriteArraySet<>();
 
-    public static class UrlVisitor implements Runnable {
+    public static class UrlVisitor implements Callable<Void> {
         public static String getContentOfWebPage(URL url) {
             final StringBuilder content = new StringBuilder();
 
@@ -37,7 +40,7 @@ class WebCrawler {
         }
 
         @Override
-        public void run() {
+        public Void call() {
             synchronized (toVisit) {
                 synchronized (visited) {
                     AtomicReference<URL> url = new AtomicReference<>(toVisit.poll());
@@ -67,30 +70,30 @@ class WebCrawler {
                     }
                 }
             }
+            return null;
         }
     }
 
     public static void main(String[] args) throws MalformedURLException {
-        toVisit.add(new URL("https://alexxozo.github.io/cinemaProject/filme-noi.html"));
-
         ExecutorService executorService = Executors.newCachedThreadPool();
-        while (!toVisit.isEmpty()) {
-            executorService.submit(new UrlVisitor());
-        }
+        Future<Void> task = null;
+
+        List<Future<Void>> listOfTasks = new LinkedList<>();
 
         try {
-            if (!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
-                executorService.shutdownNow();
-                if (!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
-                    System.err.println("Pool did not terminate");
-                }
-                System.out.println(visited);
-                System.out.println(toVisit);
-            }
+            toVisit.add(new URL("https://thedatanomad.github.io/index.html"));
+            while (!toVisit.isEmpty()) {
+                task = executorService.submit(new UrlVisitor());
+                listOfTasks.add(task);
 
-        } catch (InterruptedException ie) {
-            executorService.shutdownNow();
-            Thread.currentThread().interrupt();
+//                for (Future)
+            }
+            executorService.shutdown();
+
+            System.out.println(visited);
+            System.out.println(toVisit);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
     }
 
