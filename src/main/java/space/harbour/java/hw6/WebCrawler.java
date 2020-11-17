@@ -85,8 +85,6 @@ class WebCrawler {
             while (!toVisit.isEmpty()) {
                 task = executorService.submit(new UrlVisitor());
                 listOfTasks.add(task);
-
-//                for (Future)
             }
             executorService.shutdown();
 

@@ -1,24 +1,31 @@
 package space.harbour.java.hw7;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Movie
-{
+public class Movie {
     public String title;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Movie movie = (Movie) o;
-        return Double.compare(movie.rating, rating) == 0 &&
-                year == movie.year &&
-                runtime == movie.runtime &&
-                title.equals(movie.title) &&
-                Arrays.equals(genres, movie.genres) &&
-                director.equals(movie.director) &&
-                Arrays.equals(actors, movie.actors);
+        return Double.compare(movie.rating, rating) == 0
+                && year == movie.year
+                && runtime == movie.runtime
+                && title.equals(movie.title)
+                && Arrays.equals(genres, movie.genres)
+                && director.equals(movie.director)
+                && Arrays.equals(actors, movie.actors);
     }
 
     @Override
@@ -37,8 +44,7 @@ public class Movie
     public String[] actors;
 
     public Movie(String title, double rating, int year,
-                 int runtime, String[] genres, String director, String[] actors)
-    {
+                 int runtime, String[] genres, String director, String[] actors) {
         this.title = title;
         this.rating = rating;
         this.year = year;
@@ -49,8 +55,7 @@ public class Movie
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Movies{" + "title='" + title + '\''
                 + ", rating=" + rating
                 + ", year=" + year + ", runtime=" + runtime
@@ -60,43 +65,35 @@ public class Movie
                 + '}';
     }
 
-    public double getRating()
-    {
+    public double getRating() {
         return rating;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public int getRuntime()
-    {
+    public int getRuntime() {
         return runtime;
     }
 
-    public int getYear()
-    {
+    public int getYear() {
         return year;
     }
 
-    public String getDirector()
-    {
+    public String getDirector() {
         return director;
     }
 
-    public String[] getActors()
-    {
+    public String[] getActors() {
         return actors;
     }
 
-    public String[] getGenres()
-    {
+    public String[] getGenres() {
         return genres;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         Movie movie = new Movie("Movie Title 1", 9, 2010,
