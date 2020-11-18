@@ -13,14 +13,22 @@ public class AtmDispenser {
         this.bills = new HashMap<>();
     }
 
+    public Map<Integer, Integer> getBills() {
+        return bills;
+    }
+
     public void giveMeMoney(int amount) {
         denominationContainer.handle(amount, bills);
     }
 
     public int balance() {
-        // TODO: iterator
-
-        return 0;
+        DenominationContainer currentContainer = denominationContainer;
+        int countBalance = currentContainer.getDenomination() * currentContainer.getCount();
+        while (currentContainer.hasNext()) {
+            currentContainer = (DenominationContainer) currentContainer.next();
+            countBalance += currentContainer.getDenomination() * currentContainer.getCount();
+        }
+        return countBalance;
     }
 
 }
