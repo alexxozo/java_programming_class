@@ -35,7 +35,8 @@ public class DenominationContainer implements Iterator, Cloneable {
         DenominationContainer tailOfChain = headOfChain;
         DenominationContainer currentContainer = nextContainer;
         while (currentContainer != null) {
-            DenominationContainer clonedContainer = new DenominationContainer(currentContainer.denomination, currentContainer.count);
+            DenominationContainer clonedContainer = new
+                    DenominationContainer(currentContainer.denomination, currentContainer.count);
             tailOfChain.setNextContainer(clonedContainer);
             tailOfChain = tailOfChain.nextContainer;
             currentContainer = (DenominationContainer) currentContainer.next();
@@ -71,9 +72,9 @@ public class DenominationContainer implements Iterator, Cloneable {
             nextContainer.handle(remainingAmount, bills);
         } else {
             if (remainingAmount > 0) {
-                System.out.println("Sorry not enough money for this!");
+                System.out.println("Sorry there was a problem!");
             } else {
-                System.out.println("Succesful transaction!");
+                System.out.println("Successful transaction!");
                 System.out.println(bills);
             }
         }

@@ -1,6 +1,9 @@
 package space.harbour.java.hw9;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AtmDispenser implements Cloneable, Observable {
 
@@ -17,10 +20,10 @@ public class AtmDispenser implements Cloneable, Observable {
     @Override
     public String toString() {
 
-        return "AtmDispenser{" +
-                "denominationContainer=" + denominationContainer +
-                ", bills=" + bills +
-                '}';
+        return "AtmDispenser{"
+                + "denominationContainer=" + denominationContainer
+                + ", bills=" + bills
+                + '}';
     }
 
     public Map<Integer, Integer> getBills() {
@@ -38,19 +41,26 @@ public class AtmDispenser implements Cloneable, Observable {
     }
 
     public void giveMeMoney(int amount) {
+        int balance = balance();
         System.out.print("ATM (" + this.hashCode() + "): ");
-        denominationContainer.handle(amount, bills);
-        if (balance() == 0) {
-            notifyAllObservers();
+        if (amount > balance) {
+            System.out.println("Sorry not enough money :(");
+        } else {
+            denominationContainer.handle(amount, bills);
+            if (balance() == 0) {
+                notifyAllObservers();
+            }
+            bills.clear();
         }
-        bills.clear();
     }
 
     @Override
     protected AtmDispenser clone() throws CloneNotSupportedException {
         DenominationContainer clonedDenominationContainerChain = denominationContainer.clone();
         AtmDispenser clonedAtmDispenser = new AtmDispenser(clonedDenominationContainerChain);
-//        clonedAtmDispenser.observers = observers.clone();
+        for (BankDepartment department : observers) {
+            clonedAtmDispenser.addObserver(department);
+        }
         return new AtmDispenser(clonedDenominationContainerChain);
     }
 
